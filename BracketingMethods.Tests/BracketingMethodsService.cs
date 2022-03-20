@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Bisection.Services;
 
-namespace Bisection.UnitTests.Services
+namespace BracketingMethods.Tests
 {
     [TestClass]
     public class BisectionService_Implement
@@ -16,22 +15,40 @@ namespace Bisection.UnitTests.Services
         [TestMethod]
         public void TestBisect_ReturnValue()
         {
-            var result = _bisectionService.Bisect(12,16,14,0.5,5);
+            var result = _bisectionService.Bisect(12, 16, 0.5, 5);
 
             Assert.AreEqual(14.8125, result, $"{result} should be 14.8125");
         }
 
         #region Sample_TestCode
         [DataTestMethod]
-        [DataRow(12, 16, 14, 0.5, 2)]
-        [DataRow(12, 16, 14, 0.5, 3)]
-        [DataRow(12, 16, 14, 0.5, 4)]
-        public void TestBisect_ReturnFalse(double xl, double xu, double xr, double es, int imax)
+        [DataRow(12, 16, 0.5, 2)]
+        [DataRow(12, 16, 0.5, 3)]
+        [DataRow(12, 16, 0.5, 4)]
+        public void TestBisect_ReturnFalse(double xl, double xu, double es, int imax)
         {
-            var result = _bisectionService.Bisect(xl, xu, xr, es, imax);
+            var result = _bisectionService.Bisect(xl, xu, es, imax);
 
-            Assert.AreNotEqual(xr, $"xr value should be {xr}");
+            Assert.AreNotEqual(result, $"xr value should be {result}");
         }
         #endregion
+    }
+
+    [TestClass]
+    public class FalsePositionService_Implent
+    {
+        private readonly FalsePositionService _falsePositionService;
+
+        public FalsePositionService_Implent()
+        {
+            _falsePositionService = new FalsePositionService();
+        }
+        [TestMethod]
+        public void TestFalsePosition_ReturnValue()
+        {
+            var result = _falsePositionService.ModFalsePos(0, 1.3, 0.5, 5);
+
+            Assert.AreEqual(0.40818, result, $"{result} should be 0.40818");
+        }
     }
 }

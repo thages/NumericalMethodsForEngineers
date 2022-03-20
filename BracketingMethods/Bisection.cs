@@ -1,27 +1,28 @@
 ﻿using System;
 
-namespace Bisection.Services
+namespace BracketingMethods
 {
-    public class BisectionServices
+    public class BisectionServices : Utils.Functions
     {
         private double xrold;
+        private double xr;
         private double test;
         private double ea;
-        private int i;
+        
 
-        public double Bisect(double xl, double xu, double xr, double es, int imax)
+        public double Bisect(double xl, double xu, double es, int imax)
         {
             Console.WriteLine($" Iter |   Xl   |   Xu   |   Xr   |   Ea\n");
-            while (ea > es || i <= imax)
+            for(int i  = 0; i <= imax; i++)
             {
                 xrold = xr;
-                xr = R((xl + xu) / 2);
+                xr = Round((xl + xu) / 2,4);
 
                 if (xr != 0)
                 {
-                    ea = R(Math.Abs((xr - xrold) / xr) * 100);
+                    ea = Round(Math.Abs((xr - xrold) / xr) * 100,4);
                 }
-                test = R(F(xl) * F(xr));
+                test = Round(Fn1(xl) * Fn1(xr),4);
 
                 if (test < 0)
                 {
@@ -33,7 +34,12 @@ namespace Bisection.Services
                     ea = 0;
                 }
                 Console.WriteLine($"  {i}   |   {xl}   |   {xu}   |   {xr}   |   {ea}\n");
-                i++;
+
+                if (ea < es)
+                {
+                    break;
+                }
+
             }
 
             return xr;
@@ -41,16 +47,6 @@ namespace Bisection.Services
             throw new NotImplementedException("Please create a test first");
         }
 
-        private double F(double x)
-        {
-            return Math.Sin(10 * x) + Math.Cos(3 * x);
-        }
-
        
-        private double R(double value)
-        {
-            double power = Math.Pow(10.0, 4);
-            return Math.Truncate((power * value)) / power;
-        }
     }
 }
