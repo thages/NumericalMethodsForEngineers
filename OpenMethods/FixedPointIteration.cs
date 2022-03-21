@@ -1,5 +1,4 @@
-﻿using System;
-using Utils;
+﻿using Utils;
 
 namespace OpenMethods
 {
@@ -22,11 +21,11 @@ namespace OpenMethods
             for (int i = 0; i <= imax; i++)
             {
                 xrold = xr;
-                xr = Round(G(xrold),6);
+                xr = Math.Round(G(xrold),6);
                 
                 if (xr != 0)
                 {
-                    ea = Round(ApproximateError(xr,  xrold), 6);
+                    ea = Math.Round(ApproximateError(xr,  xrold), 6);
                 }
 
                 Console.WriteLine($"  {i}   |   {xr}   |   {ea}\n");

@@ -30,12 +30,12 @@ namespace BracketingMethods
             {
                 xrold = xr;
 
-                xr = Round((xu - fu) * (xl - xu) / (fl - fu), 5);
+                xr = Math.Round((xu - fu) * (xl - xu) / (fl - fu), 5);
                 fr = F(xr);
                 
                 if (xr != 0)
                 {
-                    ea = Round(ApproximateError(xr, xrold), 5);
+                    ea = Math.Round(ApproximateError(xr, xrold), 5);
                 };
 
                 test = fl * fr;

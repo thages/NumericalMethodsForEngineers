@@ -20,13 +20,13 @@ namespace BracketingMethods
             for(int i  = 0; i <= imax; i++)
             {
                 xrold = xr;
-                xr = Round((xl + xu) / 2,4);
+                xr = Math.Round((xl + xu) / 2,4);
 
                 if (xr != 0)
                 {
-                    ea = Round(ApproximateError(xr, xrold), 4);
+                    ea = Math.Round(ApproximateError(xr, xrold), 4);
                 }
-                test = Round(F(xl) * F(xr),4);
+                test = Math.Round(F(xl) * F(xr),4);
 
                 if (test < 0)
                 {
