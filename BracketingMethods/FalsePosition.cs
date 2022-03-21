@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Utils;
 
 namespace BracketingMethods
 {
-    public class FalsePositionService : Utils.Functions
+    public class FalsePositionService : Functions
     {
         private double xrold;
         private double xr;
@@ -13,24 +13,29 @@ namespace BracketingMethods
         private double fr;
         private int iu;
         private int il;
-        
+
+        private double F(double x)
+        {
+            return Math.Pow(x, 10) - 1;
+        }
+
         public double ModFalsePos(double xl, double xu,  double es, int imax)
         {
             Console.WriteLine($" Iter |   Xl   |   Xu   |   Xr   |   Ea\n");
 
-            fl = Fn2(xl);
-            fu = Fn2(xu);
+            fl = F(xl);
+            fu = F(xu);
 
             for (int i = 0; i <= imax; i++)
             {
                 xrold = xr;
 
                 xr = Round((xu - fu) * (xl - xu) / (fl - fu), 5);
-                fr = Fn2(xr);
+                fr = F(xr);
                 
                 if (xr != 0)
                 {
-                    ea = Round(Math.Abs((xr - xrold) / xr) * 100, 5);
+                    ea = Round(ApproximateError(xr, xrold), 5);
                 };
 
                 test = fl * fr;
@@ -38,7 +43,7 @@ namespace BracketingMethods
                 if (test < 0) 
                 {
                     xu = xr;
-                    fu = Fn2(xu);
+                    fu = F(xu);
                     iu = 0;
                     il++;
 
@@ -50,7 +55,7 @@ namespace BracketingMethods
                 } else if (test > 0)
                 {
                     xl = xr;
-                    fl = Fn2(xl);
+                    fl = F(xl);
                     il = 0;
                     iu++;
                     

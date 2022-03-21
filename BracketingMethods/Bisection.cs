@@ -1,14 +1,18 @@
-﻿using System;
+﻿using Utils;
 
 namespace BracketingMethods
 {
-    public class BisectionServices : Utils.Functions
+    public class BisectionServices : Functions
     {
         private double xrold;
         private double xr;
         private double test;
         private double ea;
-        
+
+        private double F(double x)
+        {
+            return Math.Sin(10 * x) + Math.Cos(3 * x);
+        }
 
         public double Bisect(double xl, double xu, double es, int imax)
         {
@@ -20,9 +24,9 @@ namespace BracketingMethods
 
                 if (xr != 0)
                 {
-                    ea = Round(Math.Abs((xr - xrold) / xr) * 100,4);
+                    ea = Round(ApproximateError(xr, xrold), 4);
                 }
-                test = Round(Fn1(xl) * Fn1(xr),4);
+                test = Round(F(xl) * F(xr),4);
 
                 if (test < 0)
                 {
