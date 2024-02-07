@@ -2,7 +2,7 @@
 
 namespace OpenMethods
 {
-    public class FixedPointIterationService : Functions 
+    public class FixedPointIteration : Functions 
     {
         private double xr;
         private double xrold;
@@ -24,17 +24,14 @@ namespace OpenMethods
                 xr = Math.Round(G(xrold),6);
                 
                 if (xr != 0)
-                {
                     ea = Math.Round(ApproximateError(xr,  xrold), 6);
-                }
-
+                
                 Console.WriteLine($"  {i}   |   {xr}   |   {ea}\n");
 
                 if (ea < es)
-                {
                     break;
-                }
             }
+            
             return xr;
         }
     }

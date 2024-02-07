@@ -2,7 +2,7 @@
 
 namespace BracketingMethods
 {
-    public class FalsePositionService : Functions
+    public class FalsePosition : Functions
     {
         private double xrold;
         private double xr;
@@ -40,45 +40,46 @@ namespace BracketingMethods
 
                 test = fl * fr;
 
-                if (test < 0) 
+                switch (test)
                 {
-                    xu = xr;
-                    fu = F(xu);
-                    iu = 0;
-                    il++;
-
-                    if ( il >= 2)
+                    case < 0:
                     {
-                        fl /= 2;
-                    }
+                        xu = xr;
+                        fu = F(xu);
+                        iu = 0;
+                        il++;
 
-                } else if (test > 0)
-                {
-                    xl = xr;
-                    fl = F(xl);
-                    il = 0;
-                    iu++;
+                        if ( il >= 2)
+                            fl /= 2;
+                        
+                        break;
+                    }
+                    case > 0:
+                    {
+                        xl = xr;
+                        fl = F(xl);
+                        il = 0;
+                        iu++;
                     
-                    if (iu >= 2)
-                    {
-                        fu /= 2;
+                        if (iu >= 2)
+                            fu /= 2;
+                        
+
+                        break;
                     }
-                } else
-                {
-                    ea = 0;
+                    default:
+                        ea = 0;
+                        break;
                 }
 
                 Console.WriteLine($"  {i}   |   {xl}   |   {xu}   |   {xr}   |   {ea}\n");
                 
                 if (ea < es)
-                {
                     break;
-                }
+
             }
 
             return xr;
-
-            throw new NotImplementedException("Please create a test first");
         }
 
     }

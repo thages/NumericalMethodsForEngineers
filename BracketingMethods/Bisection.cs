@@ -2,7 +2,7 @@
 
 namespace BracketingMethods
 {
-    public class BisectionServices : Functions
+    public class Bisection : Functions
     {
         private double xrold;
         private double xr;
@@ -17,6 +17,7 @@ namespace BracketingMethods
         public double Bisect(double xl, double xu, double es, int imax)
         {
             Console.WriteLine($" Iter |   Xl   |   Xu   |   Xr   |   Ea\n");
+            
             for(int i  = 0; i <= imax; i++)
             {
                 xrold = xr;
@@ -28,15 +29,19 @@ namespace BracketingMethods
                 }
                 test = Math.Round(F(xl) * F(xr),4);
 
-                if (test < 0)
+                switch (test)
                 {
-                    xu = xr;
-                } else if (test > 0) {
-                    xl = xr;
-                } else
-                {
-                    ea = 0;
+                    case < 0:
+                        xu = xr;
+                        break;
+                    case > 0:
+                        xl = xr;
+                        break;
+                    default:
+                        ea = 0;
+                        break;
                 }
+                
                 Console.WriteLine($"  {i}   |   {xl}   |   {xu}   |   {xr}   |   {ea}\n");
 
                 if (ea < es)
@@ -47,8 +52,6 @@ namespace BracketingMethods
             }
 
             return xr;
-
-            throw new NotImplementedException("Please create a test first");
         }
 
        

@@ -1,9 +1,8 @@
 ﻿namespace Utils
 {
-    public class Functions
+    public abstract class Functions
     {
-
-        public double ApproximateError(double x, double xold)
+        protected virtual double ApproximateError(double x, double xold)
         {
             return Math.Abs((x - xold) / x) * 100;
         }
